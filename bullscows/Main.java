@@ -3,7 +3,7 @@ package bullscows;
 import java.util.Scanner;
 
 public class Main {
-    static int[] secretCode = {9, 3, 0, 5};
+    static int[] secretCode = {2, 1, 3, 7};
 
     public static int[] getPlayerGuess() {
         Scanner scanner = new Scanner(System.in);
@@ -39,11 +39,11 @@ public class Main {
         }
 
         if (cows != 0 && bulls != 0) {
-            System.out.println("Grade: " + bulls + "bull(s) and " + cows + " cow(s). The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
+            System.out.println("Grade: " + bulls + " bull(s) and " + cows + " cow(s). The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
         } else if (cows != 0) {
             System.out.println("Grade: " + cows + " cow(s). The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
         } else if (bulls != 0) {
-            System.out.println("Grade: " + bulls + "bull(s). The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
+            System.out.println("Grade: " + bulls + " bull(s). The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
         } else {
             System.out.println("Grade: None. The secret code is " + secretCode[0] + secretCode[1] + secretCode[2] + secretCode[3]);
         }
