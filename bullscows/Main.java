@@ -1,5 +1,7 @@
 package bullscows;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -49,7 +51,25 @@ public class Main {
         }
     }
 
+    public static void generateSecretCode() {
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        StringBuilder code = new StringBuilder();
+
+        if (size > 0 && size < 11) {
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            for (int i = 1; i < 10; i++) list.add(i);
+            Collections.shuffle(list);
+            for (int i = 0; i < size; i++) code.append(list.get(i));
+            System.out.printf("The random secret number is %s.", code);
+        } else {
+            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
+        }
+
+    }
+
     public static void main(String[] args) {
-        gradePlayerGuess(getPlayerGuess());
+        //gradePlayerGuess(getPlayerGuess());
+        generateSecretCode();
     }
 }
