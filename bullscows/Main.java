@@ -2,6 +2,7 @@ package bullscows;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -22,16 +23,23 @@ public class Main {
         return guess;
     }
 
-    public static void generateSecretCode() {
+    public static boolean generateSecretCode() {
         System.out.println("Input the lenght of the secret code:");
-
         Scanner scanner = new Scanner(System.in);
-        int size = scanner.nextInt();
+        int size;
 
-        System.out.println("Input the number of possible symbols in the code:");
-        numOfPossibleSymbols = scanner.nextInt();
-
-        if (size > 0 && size <= numOfPossibleSymbols) {
+        try {
+            size = scanner.nextInt();
+            System.out.println("Input the number of possible symbols in the code:");
+            numOfPossibleSymbols = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Error: provided input isn't a valid number.");
+            return false;
+        }
+        if (numOfPossibleSymbols > 36) {
+            System.out.println("Error: maximum number of possible symbols in the code is 36 (0-9, a-z).");
+            return false;
+        } else if (size > 0 && size <= numOfPossibleSymbols) {
             ArrayList<Character> list = new ArrayList<>();
             for (int i = 1; i < numOfPossibleSymbols; i++) list.add(allSymbols.charAt(i));
             Collections.shuffle(list);
@@ -50,8 +58,10 @@ public class Main {
             }
             System.out.println("Okay, let's start a game!");
         } else {
-            System.out.println("Error: can't generate a secret number with a length of " + size + " because there aren't enough unique digits.");
+            System.out.println("Error: can't generate a secret code with a length of " + size + " because there aren't enough unique symbols.");
+            return false;
         }
+        return true;
     }
 
     public static boolean gradePlayerGuess(StringBuilder guess) {
@@ -88,7 +98,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        generateSecretCode();
-        while (gradePlayerGuess(getPlayerGuess())) ;
+        if (generateSecretCode()) {
+            while (gradePlayerGuess(getPlayerGuess())) ;
+        }
     }
 }
